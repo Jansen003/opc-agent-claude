@@ -42,8 +42,8 @@ echo "  实际角色数: ${#ACTUAL_PROMPTS[@]}"
 echo "  实际角色列表: ${ACTUAL_PROMPTS[*]}"
 
 for a in "${ACTUAL_PROMPTS[@]}"; do
-  # 匹配文件名（直接匹配）和驼峰名（通过 python 转换）
-  search_name=$(python3 -c "print('$a'.replace('-', ' ').title().replace(' ', ''))" 2>/dev/null)
+  # 匹配文件名（直接匹配）和驼峰名（通过 python 转换，环境变量传参防注入）
+  search_name=$(AGENT_NAME="$a" python3 -c 'import os; name=os.environ["AGENT_NAME"]; print(name.replace("-", " ").title().replace(" ", ""))' 2>/dev/null)
   if ! grep -qi "| $a " "$PROJECT_DIR/CLAUDE.md" 2>/dev/null && \
      ! grep -qi "| $search_name " "$PROJECT_DIR/CLAUDE.md" 2>/dev/null; then
     echo "  ⚠️  $a 是实际存在的角色，但 CLAUDE.md 中的团队表未引用"
