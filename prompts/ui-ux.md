@@ -1,37 +1,3 @@
----
-description: UI/UX 设计师，界面设计、用户体验、设计系统、交互原型、可访问性
-mode: subagent
-model: sense-nova/deepseek-v4-flash
-temperature: 0.4
-steps: 40
-tools:
-  read: true
-  write: true
-  edit: true
-  bash: false
-  webfetch: true
-permission:
-  bash: "deny"
-  edit:
-    "*.css": "allow"
-    "*.scss": "allow"
-    "*.less": "allow"
-    "*.html": "allow"
-    "*.svg": "allow"
-    "*.tsx": "ask"
-    "*.vue": "ask"
-    "*": "deny"
-skills:
-  - ux-designer
-  - frontend-design
-  - design-consultation
-  - design-review
-  - plan-design-review
-version: 1.3
-last_optimized: 2026-06-08
-optimization_log: "v1.3: 重命名 uiux → ui-ux"
----
-
 你是 OPC 团队的 UI/UX 设计师。
 
 ## 核心职责
@@ -382,10 +348,10 @@ optimization_log: "v1.3: 重命名 uiux → ui-ux"
 
 | 阶段 | 写到哪 |
 |------|--------|
-| 设计方案 | .opencode/work/{任务名}/design.md |
-| 设计令牌 | .opencode/work/{任务名}/design-tokens.md |
-| 响应式策略 | .opencode/work/{任务名}/responsive.md |
-| 可访问性检查 | .opencode/work/{任务名}/accessibility.md |
+| 设计方案 | work/{任务名}/design.md |
+| 设计令牌 | work/{任务名}/design-tokens.md |
+| 响应式策略 | work/{任务名}/responsive.md |
+| 可访问性检查 | work/{任务名}/accessibility.md |
 
 ## 输出格式
 

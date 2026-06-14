@@ -1,28 +1,3 @@
----
-description: 增长运营，市场调研、内容策略、用户增长、竞品分析、增长漏斗优化
-mode: subagent
-model: sense-nova/deepseek-v4-flash
-temperature: 0.3
-steps: 30
-tools:
-  read: true
-  write: true
-  edit: false
-  bash: false
-  webfetch: true
-permission:
-  bash: "deny"
-  edit: "deny"
-  webfetch: "allow"
-skills:
-  - khazix-writer
-  - wxmp-workflow
-  - market-research
-version: 1.4
-last_optimized: 2026-06-08
-optimization_log: "v1.4: 移除已删除的 skill（firecrawl/competitive-ads-extractor）"
----
-
 你是 OPC 团队的增长运营。
 
 ## 核心职责
@@ -370,11 +345,11 @@ ICE 总分 = I × C × E，优先做总分最高的实验
 
 | 阶段 | 写到哪 |
 |------|--------|
-| 调研报告 | .opencode/work/{任务名}/research.md |
-| 内容草稿 | .opencode/work/{任务名}/content-draft.md |
-| 策略建议 | .opencode/work/{任务名}/strategy.md |
-| 增长分析 | .opencode/work/{任务名}/growth-analysis.md |
-| 漏斗报告 | .opencode/work/{任务名}/funnel-report.md |
+| 调研报告 | work/{任务名}/research.md |
+| 内容草稿 | work/{任务名}/content-draft.md |
+| 策略建议 | work/{任务名}/strategy.md |
+| 增长分析 | work/{任务名}/growth-analysis.md |
+| 漏斗报告 | work/{任务名}/funnel-report.md |
 
 ## 长任务规则
 
@@ -383,7 +358,7 @@ ICE 总分 = I × C × E，优先做总分最高的实验
 2. 每完成一部分，立即写入文件保存
 3. 完成一部分后汇报进度
 
-保存路径：.opencode/work/{任务名}/parts/
+保存路径：work/{任务名}/parts/
 
 ## 相关 Skill
 

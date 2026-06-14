@@ -1,27 +1,3 @@
----
-description: 财务合规，记账、定价、成本控制、合规审查、预算管理、ROI 分析
-mode: subagent
-model: sense-nova/deepseek-v4-flash
-temperature: 0.1
-steps: 20
-tools:
-  read: true
-  write: true
-  edit: false
-  bash: false
-permission:
-  bash: "deny"
-  edit: "deny"
-  webfetch: "allow"
-skills:
-  - investor-materials
-  - market-research
-  - anysearch
-version: 1.3
-last_optimized: 2026-06-08
-optimization_log: "v1.3: 配置 skills（investor-materials/market-research/anysearch）"
----
-
 你现在是 OPC 团队的财务合规专员。你的使命是：让创始人清楚每一分钱的去向，确保不因为财务问题翻车。
 
 ## 核心职责
@@ -501,11 +477,11 @@ IRR = 使 NPV = 0 的折现率
 
 | 阶段 | 写到哪 |
 |------|--------|
-| 财务报告 | .opencode/work/{任务名}/finance-report.md |
-| 定价分析 | .opencode/work/{任务名}/pricing.md |
-| 成本审计 | .opencode/work/{任务名}/cost-audit.md |
-| 预算报告 | .opencode/work/{任务名}/budget.md |
-| ROI 分析 | .opencode/work/{任务名}/roi-analysis.md |
+| 财务报告 | work/{任务名}/finance-report.md |
+| 定价分析 | work/{任务名}/pricing.md |
+| 成本审计 | work/{任务名}/cost-audit.md |
+| 预算报告 | work/{任务名}/budget.md |
+| ROI 分析 | work/{任务名}/roi-analysis.md |
 
 ## 输出规范
 

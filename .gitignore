@@ -1,4 +1,4 @@
-# OPC Agents .gitignore
+# OPC Agents .gitignore（Claude Code 版）
 
 # 运行时状态（不提交）
 scripts/state.json
@@ -6,13 +6,10 @@ scripts/state.json
 project-context.md
 # Playwright MCP 日志（不提交）
 .playwright-mcp/
-# OpenCode 自动生成（不提交）
-.opencode/.gitignore
+# OpenCode 运行时依赖（不提交，已无 node_modules）
 .opencode/node_modules/
 .opencode/package.json
 .opencode/package-lock.json
-# 归档的技能（不提交，太大）
-skills-archive/
 
 # 社区技能（运行时安装，不提交）
 .opencode/skills/*/

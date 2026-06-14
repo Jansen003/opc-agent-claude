@@ -1,50 +1,50 @@
-# OPC Agents
+# OPC Agents — Claude Code 版
 
 一人公司（One Person Company）的 AI Agent 团队系统。
 
-基于 OpenCode 原生 Agent 系统构建，配置驱动 + 智能 Prompt + 自动化。
+基于 Claude Code 构建，总指挥 Director + 9 个子 Agent 的调度式协作架构。
 
 ## 架构
 
-1 个主 Agent + 8 个子 Agent：
+1 个总指挥 + 9 个子 Agent：
 
-| Agent | 中文名 | 模型 | 模式 | 角色 |
-|-------|--------|------|------|------|
-| **Director** | 总指挥 | deepseek-v4-flash | primary | 调度决策 |
-| **Advisor** | 智囊 | deepseek-v4-flash | all | 分析质疑、决策辅助 |
-| **Dev** | 工程师 | deepseek-v4-flash | subagent | 代码实现 |
-| **Product** | 产品经理 | deepseek-v4-flash | subagent | 需求澄清（苏格拉底式） |
-| **UI-UX** | 设计师 | deepseek-v4-flash | subagent | 设计体验 |
-| **Guardian** | 哨兵 | deepseek-v4-flash | subagent | 安全审查 |
-| **Growth** | 增长 | deepseek-v4-flash | subagent | 内容运营 |
-| **QA** | 测试 | deepseek-v4-flash | subagent | 测试验证 |
-| **AgentManager** | 管理者 | deepseek-v4-flash | subagent | Agent 生命周期管理 |
-| **Finance** | 财务 | deepseek-v4-flash | subagent | 记账合规 |
+| 角色 | 文件 | 中文名 | 职责 |
+|------|------|--------|------|
+| **Director** | `prompts/director.md` | 总指挥 | 调度决策、信息汇总、质量把关 |
+| **Advisor** | `prompts/advisor.md` | 智囊 | 分析质疑、决策辅助、翻译桥梁 |
+| **Dev** | `prompts/dev.md` | 工程师 | 代码实现、技术方案、部署运维 |
+| **Product** | `prompts/product.md` | 产品经理 | 需求澄清、PRD 输出、竞品分析 |
+| **UI-UX** | `prompts/ui-ux.md` | 设计师 | 界面设计、用户体验、设计系统 |
+| **Guardian** | `prompts/guardian.md` | 哨兵 | 安全审查、技术债识别、风险巡检 |
+| **Growth** | `prompts/growth.md` | 增长 | 增长运营、内容策略、市场调研 |
+| **QA** | `prompts/qa.md` | 测试 | 测试验证、质量把关、Bug 管理 |
+| **Finance** | `prompts/finance.md` | 财务 | 记账合规、定价、成本控制 |
+| **AgentManager** | `prompts/agent-manager.md` | 管理者 | Agent 生命周期管理、质量评估 |
 
-## 模型分配原则
+## 工作方式
 
-- **deepseek-v4-flash**（全部 Agent）：1M 上下文
+1. 创始人发布任务 → **Director (总指挥)** 自动接收
+2. Director 查归属表 → 读取 `prompts/{role}.md` 获取子 Agent 提示词
+3. Director 通过 **Claude Code Agent tool** 派生子 Agent（`subagent_type: "general-purpose"`）
+4. 子 Agent 独立运行完成任务 → Director 审查产出 → 汇总报告给创始人
+
+**你只需要说需求，Director 自动调度。每个子 Agent 独立运行，有独立的上下文。**
 
 ## 快速开始
 
 1. Clone 本仓库
-2. 在目录下启动 OpenCode
-3. Director 会自动启动，执行每日自检
-
-## 交互方式
-
-- **Tab 切换**：在 Director 和 Advisor 之间切换
-- **@提及**：直接调用某个 Agent（如 `@dev 帮我看这个报错`）
-- **自动调度**：描述任务，Director 自动分配给合适的 Agent
+2. 在目录下启动 Claude Code
+3. Director 自动运行，执行每日自检
+4. 直接发任务，Director 会自动调度子 Agent
 
 ## 任务分级
 
 | 级别 | 场景 | 调用谁 |
 |------|------|--------|
 | L0 | 格式调整、简单问答 | Director 自己搞定 |
-| L1 | 代码小改、需求分析 | 调 1 个 agent |
+| L1 | 代码小改、需求分析 | 调 1 个子 Agent |
 | L2 | 功能开发、技术方案 | 调 2-3 个，走流水线 |
-| L3 | 架构决策、产品方向 | 全员会议，等确认 |
+| L3 | 架构决策、产品方向 | 全员 + 创始人确认 |
 
 ## 开发流水线
 
@@ -53,32 +53,35 @@
 ## 文件结构
 
 ```
-opencode.json               MiMo provider + 模型配置（可提交版本管理）
-.opencode/
-├── agents/                 10 个 Agent 定义
-├── skills/                 社区 + OPC 专属技能
-└── work/                   长任务工作区（运行时产出，不提交）
+CLAUDE.md                   总指挥系统提示词（Claude Code 入口）
+prompts/
+├── director.md              完整 Director 提示词参考
+├── advisor.md               9 个子 Agent 提示词
+├── dev.md
+├── product.md
+├── ui-ux.md
+├── qa.md
+├── guardian.md
+├── growth.md
+├── finance.md
+└── agent-manager.md
 scripts/
-├── auto-check.sh           每日自检
-├── quality-gate.sh         质量门禁
-└── state-manager.py        状态管理（含中断恢复）
-CLAUDE.md                   系统规则
-templates/                  项目模板
+├── auto-check.sh            每日自检
+├── quality-gate.sh          质量门禁
+└── state-manager.py         状态管理（含中断恢复）
+templates/                   项目模板
 ```
 
 ## 环境变量
 
 ```bash
-# 必填
-export MIMO_API_KEY="your_key"
-
 # 可选（默认 ~/code/opc/opc-knowledge）
 export OPC_KNOWLEDGE_PATH="/path/to/opc-knowledge"
 ```
 
 ## 中断恢复
 
-长任务中断后，新会话启动时 Director 会自动检测未完成的任务并从中断点继续。
+长任务中断后，新会话启动时 Director 自动检测未完成的任务并从中断点继续。
 
 ## 知识库
 
@@ -86,7 +89,7 @@ export OPC_KNOWLEDGE_PATH="/path/to/opc-knowledge"
 
 ## 原则
 
-- Agent 负责执行层，创始人负责决策层
+- Director 负责调度决策，子 Agent 负责执行
 - QA 和 Guardian 的首要职责是质疑，不是配合
 - 文档是交付物的一部分
 - 不读取上下文就开工 = 返工

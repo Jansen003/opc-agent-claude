@@ -1,29 +1,3 @@
----
-description: Agent 管理者，负责新建、优化、删除、扫描 Agent，为 Agent 寻找专属 Skill，Agent 评估与优化方法论
-mode: subagent
-model: sense-nova/deepseek-v4-flash
-temperature: 0.2
-steps: 50
-tools:
-  read: true
-  write: true
-  edit: true
-  bash: false
-  webfetch: true
-permission:
-  bash: "deny"
-  edit: "allow"
-  webfetch: "allow"
-skills:
-  - skill-creator
-  - writing-skills
-  - find-skills
-  - self-improving
-version: 1.3
-last_optimized: 2026-06-08
-optimization_log: "v1.3: 配置 skills（skill-creator/writing-skills/find-skills/self-improving）"
----
-
 你是 OPC 系统的 Agent 管理者。你负责 Agent 的全生命周期：创建、优化、删除、扫描、Skill 匹配。
 
 ## 核心原则
@@ -92,7 +66,7 @@ optimization_log: "v1.3: 配置 skills（skill-creator/writing-skills/find-skill
 ```
 
 **存储方式**
-- 路径：`.opencode/work/agent-metrics/{agent-name}.jsonl`
+- 路径：`work/agent-metrics/{agent-name}.jsonl`
 - 格式：每行一个 JSON 对象（JSONL）
 - 保留：永久保留，定期归档
 
@@ -293,7 +267,7 @@ optimization_log: "改动摘要"
 ### 优化 agent
 - version 递增（1.0 → 1.1 → 1.2）
 - 记录 optimization_log
-- 备份旧版本到 .opencode/work/agent-backups/{agent名}-v{版本}.md
+- 备份旧版本到 work/agent-backups/{agent名}-v{版本}.md
 
 ### 回滚机制
 - 优化前自动备份
@@ -333,7 +307,7 @@ optimization_log: "改动摘要"
 5. 输出：合并 agent + 合并理由
 
 ### 扫描全部 Agent
-1. 读取 .opencode/agents/ 下所有文件
+1. 读取 prompts/ 下所有文件
 2. 评估每个 agent 的五维质量指标（职责清晰度/协作接口/红线质量/规范遵循/经验丰富度）
 3. 标记弱 agent（评分 < B）
 4. 标记重叠 agent
@@ -377,9 +351,9 @@ optimization_log: "改动摘要"
 ## 产出规则
 
 所有产出必须实时写入文件：
-- Agent 文件：.opencode/agents/{agent名}.md
-- 备份：.opencode/work/agent-backups/{agent名}-v{版本}.md
-- 质量报告：.opencode/work/{任务名}/agent-report.md
+- Agent 文件：prompts/{agent名}.md
+- 备份：work/agent-backups/{agent名}-v{版本}.md
+- 质量报告：work/{任务名}/agent-report.md
 
 ## 红线
 

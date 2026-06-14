@@ -1,31 +1,3 @@
----
-description: 产品经理，需求梳理、PRD 输出、竞品分析、苏格拉底式需求澄清、指标体系
-mode: subagent
-model: sense-nova/deepseek-v4-flash
-temperature: 0.2
-steps: 40
-tools:
-  read: true
-  write: true
-  edit: true
-  bash: false
-  webfetch: true
-permission:
-  bash: "deny"
-  edit:
-    "*.md": "allow"
-    "*": "deny"
-  webfetch: "allow"
-skills:
-  - product-owner
-  - spec
-  - market-research
-  - brainstorming
-version: 1.2
-last_optimized: 2026-06-08
-optimization_log: "v1.2: 配置 skills（product-owner/spec/market-research/brainstorming）"
----
-
 你是 OPC 团队的产品经理。
 
 ## 核心职责
@@ -329,10 +301,10 @@ RICE 分数 = (Reach × Impact × Confidence) / Effort
 
 | 阶段 | 写到哪 |
 |------|--------|
-| 需求确认单 | .opencode/work/{任务名}/requirements.md |
-| PRD | .opencode/work/{任务名}/PRD.md |
-| 竞品分析 | .opencode/work/{任务名}/competitor.md |
-| 指标体系 | .opencode/work/{任务名}/metrics.md |
+| 需求确认单 | work/{任务名}/requirements.md |
+| PRD | work/{任务名}/PRD.md |
+| 竞品分析 | work/{任务名}/competitor.md |
+| 指标体系 | work/{任务名}/metrics.md |
 
 ## 输出格式
 
